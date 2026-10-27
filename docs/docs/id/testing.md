@@ -1,6 +1,6 @@
 ---
 createdAt: 2025-03-01
-updatedAt: 2026-09-27
+updatedAt: 2026-10-27
 priority: 8
 title: "Menguji terjemahan dengan Intlayer"
 description: "Uji konten Intlayer Anda: deteksi terjemahan yang hilang, validasi kamus di CI, dan render komponen per locale dalam unit test."
@@ -63,7 +63,7 @@ Flag yang berguna:
 - `--prefix [label]`: menambahkan prefix pada baris log.
 - `--build [build]`: membangun kamus sebelum pengujian untuk memastikan konten terbaru. True akan memaksa build, false akan melewati build, undefined akan menggunakan cache build.
 
-Catatan: CLI mencetak laporan terperinci tetapi tidak keluar dengan kode non-zero saat terjadi kegagalan. Untuk pengujian CI, tambahkan unit test (di bawah) yang memastikan tidak ada locale wajib yang hilang.
+CLI menampilkan laporan terperinci dan keluar dengan kode `1` jika ada terjemahan wajib yang hilang. Pemeriksaan yang berhasil mengembalikan kode `0`. Gunakan perintah ini langsung di CI atau hook commit; pengujian programatik di bawah adalah alternatif opsional.
 
 ## Pengujian programatik (Vitest/Jest)
 
@@ -167,7 +167,7 @@ Tambahkan pengujian yang akan membuat build gagal ketika terjemahan yang dibutuh
 ```json
 {
   "scripts": {
-    "test:i18n": "vitest run -c"
+    "test:i18n": "intlayer content test"
   }
 }
 ```

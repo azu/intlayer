@@ -1,6 +1,6 @@
 ---
 createdAt: 2025-03-01
-updatedAt: 2025-09-20
+updatedAt: 2026-10-27
 priority: 8
 title: "Testing Your Translations with Intlayer"
 description: "Test your Intlayer content: detect missing translations, validate dictionaries in CI and render components per locale in unit tests."
@@ -59,7 +59,7 @@ Useful flags:
 - `--verbose`: show verbose logs.
 - `--prefix [label]`: prefix log lines.
 
-Note: the CLI prints a detailed report but does not exit with a non-zero code on failures. For CI gating, add a unit test (below) that asserts zero missing required locales.
+The CLI prints a detailed report and exits with code `1` when any required translation is missing. A successful check exits with code `0`. Use this command directly in CI or commit hooks; the programmatic tests below are an optional alternative.
 
 ## Programmatic test (Vitest/Jest)
 
@@ -162,7 +162,7 @@ Add a test that fails the build when required translations are missing.
 ```json
 {
   "scripts": {
-    "test:i18n": "vitest run -c"
+    "test:i18n": "intlayer content test"
   }
 }
 ```

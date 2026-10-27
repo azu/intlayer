@@ -1,6 +1,6 @@
 ---
 createdAt: 2025-03-01
-updatedAt: 2026-10-08
+updatedAt: 2026-10-27
 priority: 8
 title: "使用 Intlayer 测试你的翻译"
 description: "测试 Intlayer 内容：检测缺失的翻译、在 CI 中校验字典，并在单元测试中按语言渲染组件。"
@@ -59,7 +59,7 @@ bun x intlayer content test
 - `--verbose`：显示详细日志。
 - `--prefix [标签]`：为日志行添加前缀。
 
-注意：CLI 会打印详细报告，但在失败时不会以非零状态退出。对于 CI 门控，请添加下面的单元测试，断言没有缺失的必需语言环境。
+CLI 会输出详细报告，并在缺少必需翻译时返回退出码 `1`。检查成功时返回退出码 `0`。您可以在 CI 或提交钩子中直接使用此命令；下面的编程测试是一种可选的替代方案。
 
 ## 编程测试（Vitest/Jest）
 
@@ -160,7 +160,7 @@ test("渲染法语本地化标题", () => {
 ```json
 {
   "scripts": {
-    "test:i18n": "vitest run -c"
+    "test:i18n": "intlayer content test"
   }
 }
 ```

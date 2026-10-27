@@ -1,6 +1,6 @@
 ---
 createdAt: 2025-03-01
-updatedAt: 2026-09-27
+updatedAt: 2026-10-27
 priority: 8
 title: "Testowanie tłumaczeń z Intlayer"
 description: "Testuj treść Intlayer: wykrywaj brakujące tłumaczenia, weryfikuj słowniki w CI i renderuj komponenty per locale w testach jednostkowych."
@@ -63,7 +63,7 @@ Przydatne flagi:
 - `--prefix [etykieta]`: prefiksuj linie logów.
 - `--build [build]`: zbuduj słowniki przed testowaniem, aby upewnić się, że zawartość jest aktualna. True wymusi budowanie, false pominie budowanie, undefined pozwoli użyć cache budowania.
 
-Uwaga: CLI generuje szczegółowy raport, ale nie zwraca kodu błędu przy niepowodzeniach. Aby zabezpieczyć CI, dodaj test jednostkowy (poniżej), który sprawdza brak brakujących wymaganych lokalizacji.
+CLI wyświetla szczegółowy raport i kończy działanie kodem `1`, jeśli brakuje wymaganego tłumaczenia. Pomyślna kontrola zwraca kod `0`. Używaj tego polecenia bezpośrednio w CI lub hookach commita; poniższe testy programowe są opcjonalną alternatywą.
 
 ## Test programowy (Vitest/Jest)
 
@@ -167,7 +167,7 @@ Dodaj test, który przerwie budowanie, gdy braknie wymaganych tłumaczeń.
 ```json
 {
   "scripts": {
-    "test:i18n": "vitest run -c"
+    "test:i18n": "intlayer content test"
   }
 }
 ```

@@ -1,6 +1,6 @@
 ---
 createdAt: 2025-03-01
-updatedAt: 2025-09-20
+updatedAt: 2026-10-27
 priority: 8
 title: "Intlayer ile çevirilerinizi test edin"
 description: "Intlayer içeriğinizi test edin: eksik çevirileri tespit edin, sözlükleri CI'da doğrulayın ve birim testlerinde bileşenleri locale başına render edin."
@@ -59,7 +59,7 @@ Faydalı bayraklar:
 - `--verbose`: ayrıntılı günlükleri gösterir.
 - `--prefix [label]`: günlük satırlarına önek ekler.
 
-Not: CLI ayrıntılı bir rapor yazdırır ancak başarısızlıklarda sıfır olmayan bir çıkış kodu vermez. CI kontrolü için, eksik gerekli yerel ayarların sıfır olduğunu doğrulayan bir birim testi (aşağıda) ekleyin.
+CLI ayrıntılı bir rapor yazdırır ve gerekli bir çeviri eksikse `1` çıkış kodunu döndürür. Başarılı bir kontrol `0` kodunu döndürür. Bu komutu doğrudan CI veya commit hook’larında kullanabilirsiniz; aşağıdaki programatik testler isteğe bağlı bir alternatiftir.
 
 ## Programatik test (Vitest/Jest)
 
@@ -162,7 +162,7 @@ Gerekli çeviriler eksik olduğunda derlemeyi başarısız kılan bir test ekley
 ```json
 {
   "scripts": {
-    "test:i18n": "vitest run -c"
+    "test:i18n": "intlayer content test"
   }
 }
 ```

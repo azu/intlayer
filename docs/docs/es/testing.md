@@ -1,6 +1,6 @@
 ---
 createdAt: 2025-03-01
-updatedAt: 2025-09-20
+updatedAt: 2026-10-27
 priority: 8
 title: "Probar tus traducciones con Intlayer"
 description: "Prueba tu contenido de Intlayer: detecta traducciones que faltan, valida los diccionarios en CI y renderiza componentes por locale en tus tests."
@@ -59,7 +59,7 @@ Flags útiles:
 - `--verbose`: muestra registros detallados.
 - `--prefix [etiqueta]`: prefija las líneas de registro.
 
-Nota: la CLI imprime un informe detallado pero no termina con un código distinto de cero en caso de fallos. Para control en CI, añade una prueba unitaria (más abajo) que verifique que no hay locales requeridos faltantes.
+La CLI muestra un informe detallado y termina con el código `1` si falta alguna traducción requerida. Una comprobación correcta devuelve el código `0`. Usa este comando directamente en CI o en hooks de commit; las pruebas programáticas siguientes son una alternativa opcional.
 
 ## Prueba programática (Vitest/Jest)
 
@@ -162,7 +162,7 @@ Agrega una prueba que falle la compilación cuando falten traducciones requerida
 ```json
 {
   "scripts": {
-    "test:i18n": "vitest run -c"
+    "test:i18n": "intlayer content test"
   }
 }
 ```

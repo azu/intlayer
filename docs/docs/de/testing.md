@@ -1,6 +1,6 @@
 ---
 createdAt: 2025-03-01
-updatedAt: 2025-09-20
+updatedAt: 2026-10-27
 priority: 8
 title: "Übersetzungen mit Intlayer testen"
 description: "Testen Sie Ihre Intlayer-Inhalte: fehlende Übersetzungen erkennen, Wörterbücher in CI validieren und Komponenten pro Locale in Unit-Tests rendern."
@@ -59,7 +59,7 @@ Nützliche Optionen:
 - `--verbose`: zeigt ausführliche Protokolle an.
 - `--prefix [Label]`: fügt den Protokollzeilen ein Präfix hinzu.
 
-Hinweis: Die CLI gibt einen detaillierten Bericht aus, beendet sich jedoch bei Fehlern nicht mit einem Fehlercode. Für CI-Gates fügen Sie einen Unit-Test (siehe unten) hinzu, der sicherstellt, dass keine erforderlichen Sprachversionen fehlen.
+Die CLI gibt einen detaillierten Bericht aus und beendet sich mit Code `1`, wenn eine erforderliche Übersetzung fehlt. Eine erfolgreiche Prüfung liefert Code `0`. Verwenden Sie diesen Befehl direkt in CI oder Commit-Hooks; die folgenden programmatischen Tests sind eine optionale Alternative.
 
 ## Programmatischer Test (Vitest/Jest)
 
@@ -162,7 +162,7 @@ Fügen Sie einen Test hinzu, der den Build fehlschlagen lässt, wenn erforderlic
 ```json
 {
   "scripts": {
-    "test:i18n": "vitest run -c"
+    "test:i18n": "intlayer content test"
   }
 }
 ```

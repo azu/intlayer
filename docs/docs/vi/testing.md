@@ -1,6 +1,6 @@
 ---
 createdAt: 2025-03-01
-updatedAt: 2026-09-27
+updatedAt: 2026-10-27
 priority: 8
 title: "Kiểm thử bản dịch với Intlayer"
 description: "Kiểm thử nội dung Intlayer: phát hiện bản dịch còn thiếu, xác thực từ điển trong CI và render component theo locale trong unit test."
@@ -63,7 +63,7 @@ Các cờ hữu ích:
 - `--prefix [label]`: thêm tiền tố cho dòng log.
 - `--build [build]`: build các từ điển trước khi kiểm thử để đảm bảo nội dung được cập nhật. True sẽ ép buộc build, false sẽ bỏ qua build, undefined sẽ cho phép sử dụng cache của build.
 
-Lưu ý: CLI in ra báo cáo chi tiết nhưng không thoát với mã lỗi khác 0 khi có lỗi. Để kiểm soát CI, hãy thêm một unit test (dưới đây) để xác nhận không có locale bắt buộc nào bị thiếu.
+CLI in báo cáo chi tiết và thoát với mã `1` khi thiếu bất kỳ bản dịch bắt buộc nào. Khi kiểm tra thành công, mã thoát là `0`. Dùng lệnh này trực tiếp trong CI hoặc hook commit; các kiểm thử lập trình bên dưới là một phương án thay thế tùy chọn.
 
 ## Kiểm tra lập trình (Vitest/Jest)
 
@@ -167,7 +167,7 @@ Thêm một bài kiểm thử mà sẽ làm build thất bại khi thiếu bản
 ```json
 {
   "scripts": {
-    "test:i18n": "vitest run -c"
+    "test:i18n": "intlayer content test"
   }
 }
 ```
